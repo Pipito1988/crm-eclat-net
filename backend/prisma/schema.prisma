@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Client {
+  id             String           @id @default(uuid())
+  name           String
+  clientStatus   ClientStatus     @default(ATIVO)
+  clientType     String           @default("Imovel")
+  startDate      DateTime?
+  serviceAddress String?
+  billingAddress String?
+  value          Decimal          @db.Decimal(12, 2)
+  frequency      BillingFrequency @default(MENSAL)
+  method         PaymentMethod    @default(TRANSFERENCIA)
+  service        String?
+  contract       ContractStatus   @default(SEM_CONTRATO)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  devis          Devis[]
+  employees      Employee[]
+  services       Service[]
+}
+
+model Employee {
+  id        String   @id @default(uuid())
+  name      String
+  salary    Decimal  @default(0) @db.Decimal(12, 2)
+  clientId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+}
+
+model Devis {
+  id        String      @id @default(uuid())
+  title     String
+  amount    Decimal     @db.Decimal(12, 2)
+  date      DateTime?
+  valid     DateTime?
+  status    DevisStatus @default(ENVIADO)
+  active    Boolean     @default(true)
+  notes     String?
+  clientId  String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  client    Client      @relation(fields: [clientId], references: [id], onDelete: Cascade)
+}
+
+model Service {
+  id           String   @id @default(uuid())
+  category     String?
+  freq         String?
+  weekday      String?
+  time         String?
+  notes        String?
+  clientId     String
+  // Campos de poubelles (compatibilidade v3.6/v3.7)
+  binsEnabled  Boolean  @default(false)
+  binsDays     Int      @default(0)
+  binsWeekdays Json     @default("[]")
+  binsTypes    Json     @default("[]")
+  binsTypesMap Json     @default("{}")
+  binsSchedule String?
+  binsTimeOut  String   @default("20:00")
+  binsTimeIn   String   @default("06:00")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  client       Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+}
+
+enum DevisStatus {
+  ENVIADO
+  ACEITE
+  RECUSADO
+  RASCUNHO
+}
+
+enum ClientStatus {
+  ATIVO
+  ESPECULATIVO
+  INATIVO
+}
+
+enum BillingFrequency {
+  MENSAL
+  SEMANAL
+  PAGAMENTO_UNICO
+  OUTRO
+}
+
+enum PaymentMethod {
+  TRANSFERENCIA
+  CHEQUE
+  DINHEIRO
+  OUTRO
+}
+
+enum ContractStatus {
+  COM_CONTRATO
+  SEM_CONTRATO
+  A_NEGOCIAR
+}

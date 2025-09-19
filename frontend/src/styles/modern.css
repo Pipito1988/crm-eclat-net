@@ -1,0 +1,411 @@
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Override existing styles with modern design */
+
+/* Modern Form Elements */
+input,
+select,
+textarea {
+  padding: var(--space-3) !important;
+  border: 1px solid var(--gray-300) !important;
+  border-radius: var(--radius-lg) !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+  color: var(--text-primary) !important;
+  background: var(--bg-primary) !important;
+  transition: var(--transition) !important;
+  font-family: inherit !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-light) !important;
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+  background: var(--gray-100) !important;
+  color: var(--text-muted) !important;
+  cursor: not-allowed !important;
+}
+
+/* Modern Labels */
+label {
+  display: block !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  color: var(--text-primary) !important;
+  margin-bottom: var(--space-2) !important;
+}
+
+/* Modern Grid Layouts */
+.stat-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap: var(--space-4) !important;
+  margin-top: var(--space-6) !important;
+}
+
+.form-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  gap: var(--space-4) !important;
+}
+
+.list-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)) !important;
+  gap: var(--space-4) !important;
+  margin-top: var(--space-6) !important;
+}
+
+/* Modern Stats Cards */
+.stat-card {
+  background: var(--bg-primary) !important;
+  border: 1px solid var(--gray-200) !important;
+  border-radius: var(--radius-xl) !important;
+  padding: var(--space-6) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: var(--transition) !important;
+}
+
+.stat-card:hover {
+  box-shadow: var(--shadow-md) !important;
+  transform: translateY(-2px) !important;
+}
+
+.stat-card h3 {
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  color: var(--text-secondary) !important;
+  margin: 0 0 var(--space-2) 0 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.stat-card p {
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+/* Modern Status Colors */
+.status-ok {
+  color: var(--success) !important;
+}
+
+.status-bad {
+  color: var(--danger) !important;
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+  opacity: 1 !important;
+}
+
+/* Modern Chips/Badges */
+.chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: var(--space-1) var(--space-3) !important;
+  background: var(--gray-100) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--gray-200) !important;
+  border-radius: var(--radius-full) !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+}
+
+.svc-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: var(--space-1) var(--space-2) !important;
+  background: var(--primary-bg) !important;
+  color: var(--primary) !important;
+  border: 1px solid var(--primary-light) !important;
+  border-radius: var(--radius-full) !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+}
+
+/* Modern Alerts */
+.alert {
+  background: var(--danger-bg) !important;
+  border: 1px solid var(--danger-light) !important;
+  color: var(--danger-dark) !important;
+  padding: var(--space-4) !important;
+  border-radius: var(--radius-lg) !important;
+  font-size: 0.875rem !important;
+}
+
+/* Modern Card Actions */
+.card-actions {
+  display: flex !important;
+  gap: var(--space-2) !important;
+  justify-content: flex-end !important;
+  margin-top: var(--space-4) !important;
+  padding-top: var(--space-4) !important;
+  border-top: 1px solid var(--gray-200) !important;
+}
+
+/* Modern Fieldsets */
+fieldset.block {
+  border: 1px solid var(--gray-200) !important;
+  border-radius: var(--radius-xl) !important;
+  padding: var(--space-6) !important;
+  background: var(--gray-50) !important;
+  margin: var(--space-4) 0 !important;
+}
+
+fieldset.block legend {
+  padding: 0 var(--space-3) !important;
+  color: var(--primary) !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  background: var(--bg-primary) !important;
+  border-radius: var(--radius) !important;
+}
+
+/* Modern Table */
+.table {
+  background: var(--bg-primary) !important;
+  border: 1px solid var(--gray-200) !important;
+  border-radius: var(--radius-xl) !important;
+  overflow: hidden !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.table th {
+  background: var(--gray-50) !important;
+  color: var(--text-secondary) !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: var(--space-4) !important;
+  border-bottom: 1px solid var(--gray-200) !important;
+}
+
+.table td {
+  padding: var(--space-4) !important;
+  border-bottom: 1px solid var(--gray-100) !important;
+  font-size: 0.875rem !important;
+}
+
+.table tr:hover {
+  background: var(--gray-50) !important;
+}
+
+.table tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* Modern Main Layout */
+main {
+  padding-top: 120px !important;
+  min-height: 100vh !important;
+  background: var(--bg-secondary) !important;
+}
+
+/* Header improvements */
+header.appbar {
+  background: var(--bg-primary) !important;
+  border-bottom: 1px solid var(--gray-200) !important;
+  backdrop-filter: blur(8px) !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 50 !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.nav {
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--space-3) !important;
+  padding: var(--space-4) var(--space-6) !important;
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  flex-wrap: wrap !important;
+  min-height: 64px !important;
+}
+
+/* Modern Navigation Tabs */
+.tab {
+  appearance: none !important;
+  border: 0 !important;
+  background: none !important;
+  padding: var(--space-2) var(--space-4) !important;
+  border-radius: var(--radius-lg) !important;
+  cursor: pointer !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  color: var(--text-secondary) !important;
+  position: relative !important;
+  transition: var(--transition) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: var(--space-2) !important;
+}
+
+.tab:hover {
+  color: var(--primary) !important;
+  background: var(--primary-bg) !important;
+}
+
+.tab.active {
+  color: var(--primary) !important;
+  background: var(--primary-bg) !important;
+  font-weight: 600 !important;
+}
+
+.tab.active::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -var(--space-4) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 4px !important;
+  height: 4px !important;
+  background: var(--primary) !important;
+  border-radius: var(--radius-full) !important;
+}
+
+/* Brand styling */
+.brand {
+  font-weight: 700 !important;
+  font-size: 1.25rem !important;
+  color: var(--primary) !important;
+  background: linear-gradient(135deg, var(--primary), var(--accent)) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  letter-spacing: -0.025em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: var(--space-2) !important;
+}
+
+.spacer {
+  flex: 1 !important;
+}
+
+/* Improved Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeIn 0.3s ease-out !important;
+}
+
+/* Modern Loading States */
+.loading-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--gray-200) 25%,
+    var(--gray-300) 50%,
+    var(--gray-200) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-4) !important;
+  }
+  
+  .nav {
+    padding: var(--space-3) var(--space-4) !important;
+    gap: var(--space-2) !important;
+  }
+  
+  .brand {
+    font-size: 1.125rem !important;
+  }
+  
+  .tab {
+    padding: var(--space-2) var(--space-3) !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .list-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .stat-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  main {
+    padding-top: 100px !important;
+  }
+  
+  /* Hide some export buttons on mobile */
+  .btn-ghost {
+    font-size: 0.75rem !important;
+    padding: var(--space-1) var(--space-2) !important;
+  }
+}
+
+/* Print styles improvements */
+@media print {
+  .card {
+    border: 1px solid var(--gray-300) !important;
+    box-shadow: none !important;
+    break-inside: avoid !important;
+  }
+  
+  .btn,
+  .card-actions,
+  header.appbar {
+    display: none !important;
+  }
+}
