@@ -28,7 +28,7 @@ export function generateBinEvents(services: Service[], clients: any[]): BinEvent
 
     service.binsWeekdays.forEach(dayIndex => {
       // Converter chave para string se necessário (Prisma pode retornar como string)
-      const typesMap = service.binsTypesMap || {};
+      const typesMap: Record<string | number, string[]> = service.binsTypesMap || {};
       const binTypes = typesMap[dayIndex] || typesMap[dayIndex.toString()] || [];
       
       if (binTypes.length === 0) return;
