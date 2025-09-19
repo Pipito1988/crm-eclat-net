@@ -4,31 +4,11 @@
   "description": "Sistema de gestão de clientes moderno com React e Node.js",
   "main": "backend/dist/server.js",
   "scripts": {
-    "postinstall": "npm install --prefix frontend && npm install --prefix backend",
-    "build": "npm run build --prefix frontend && npm run build --prefix backend", 
-    "start": "npm run start --prefix backend",
-    "dev": "npm run dev --prefix backend",
-    "dev:frontend": "npm run dev --prefix frontend"
-  },
-  "keywords": [
-    "crm",
-    "react",
-    "nodejs",
-    "typescript",
-    "postgresql",
-    "prisma"
-  ],
-  "author": "Pipito1988",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Pipito1988/crm-eclat-net.git"
+    "build": "echo 'Building frontend...' && cd frontend && npm install && npm run build && echo 'Building backend...' && cd ../backend && npm install && npm run build && echo 'Build completed!'",
+    "start": "cd backend && node dist/server.js",
+    "dev": "cd backend && npm run dev"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=8.0.0"
-  },
-  "dependencies": {
-    "npm": "^10.0.0"
+    "node": "18.x"
   }
 }
