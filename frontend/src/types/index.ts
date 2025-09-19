@@ -38,9 +38,9 @@ export interface Service {
   // Campos de poubelles (compatibilidade v3.6/v3.7)
   binsEnabled?: boolean;
   binsDays?: number;
-  binsWeekdays?: number[];
+  binsWeekdays?: Array<number | string>;
   binsTypes?: string[];
-  binsTypesMap?: Record<number, string[]>;
+  binsTypesMap?: Record<number | string, string[]>;
   binsSchedule?: string | null;
   binsTimeOut?: string;
   binsTimeIn?: string;
