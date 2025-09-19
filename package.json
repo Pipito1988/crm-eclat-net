@@ -4,13 +4,10 @@
   "description": "Sistema de gestão de clientes moderno com React e Node.js",
   "main": "backend/dist/server.js",
   "scripts": {
-    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
-    "build": "cd frontend && npm run build && cd ../backend && npm run build",
-    "start:prod": "cd backend && npm run start",
+    "build": "cd frontend && npm install && npm run build",
+    "start": "cd backend && npm install && npm run build && npm run start",
     "dev:backend": "cd backend && npm run dev",
-    "dev:frontend": "cd frontend && npm run dev",
-    "migrate": "cd backend && npx prisma migrate deploy",
-    "postinstall": "npm run install:all"
+    "dev:frontend": "cd frontend && npm run dev"
   },
   "keywords": [
     "crm",
