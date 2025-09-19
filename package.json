@@ -1,0 +1,29 @@
+{
+  "name": "crm-eclat-net",
+  "version": "1.0.0",
+  "description": "Sistema de gestão de clientes moderno com React e Node.js",
+  "main": "backend/dist/server.js",
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "build": "cd frontend && npm run build && cd ../backend && npm run build",
+    "start:prod": "cd backend && npm run start",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "migrate": "cd backend && npx prisma migrate deploy",
+    "postinstall": "npm run install:all"
+  },
+  "keywords": [
+    "crm",
+    "react",
+    "nodejs",
+    "typescript",
+    "postgresql",
+    "prisma"
+  ],
+  "author": "Pipito1988",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pipito1988/crm-eclat-net.git"
+  }
+}
