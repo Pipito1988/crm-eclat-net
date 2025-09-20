@@ -1,0 +1,24 @@
+[build]
+builder = "NIXPACKS"
+
+[build.nixpacksToml]
+providers = ["node"]
+
+[build.nixpacksToml.phases.build]
+cmds = [
+  "echo 'Installing frontend dependencies...'",
+  "cd frontend && npm install",
+  "echo 'Building frontend...'", 
+  "cd frontend && npm run build",
+  "echo 'Installing backend dependencies...'",
+  "cd backend && npm install",
+  "echo 'Building backend...'",
+  "cd backend && npm run build",
+  "echo 'Build completed!'"
+]
+
+[build.nixpacksToml.phases.start]
+cmd = "cd backend && node dist/server.js"
+
+[build.nixpacksToml.variables]
+NODE_ENV = "production"
