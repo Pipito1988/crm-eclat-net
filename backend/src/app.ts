@@ -20,8 +20,13 @@ if (env.NODE_ENV === 'production') {
   app.use(express.static(frontendPath));
   
   // Catch-all handler: enviar de volta o arquivo index.html para rotas do React
-  app.get('/*', (req, res) => {
-    res.sendFile(path.join(frontendPath, 'index.html'));
+  app.use((req, res, next) => {
+    // Se não é uma rota da API, serve o index.html
+    if (!req.path.startsWith('/api')) {
+      res.sendFile(path.join(frontendPath, 'index.html'));
+    } else {
+      next();
+    }
   });
 } else {
   app.use((req, res) => {
