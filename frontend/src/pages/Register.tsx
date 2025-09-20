@@ -1,50 +1,67 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { FormEvent } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { Icon } from '../components/Icon';
+import { api } from '../lib/api';
 
-interface LocationState {
-  from?: { pathname: string };
-  message?: string;
-}
-
-export function LoginPage() {
+export function RegisterPage() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const state = (location.state ?? {}) as LocationState;
-  const { login } = useAuth();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
   const [error, setError] = useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (state.message) {
-      setSuccessMessage(state.message);
-      // Limpar a mensagem do state para não aparecer se voltarem à página
-      window.history.replaceState({}, document.title);
-    }
-  }, [state.message]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError(null);
     setLoading(true);
 
+    // Validações
+    if (formData.password !== formData.confirmPassword) {
+      setError('As palavras-passe não coincidem');
+      setLoading(false);
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError('A palavra-passe deve ter pelo menos 6 caracteres');
+      setLoading(false);
+      return;
+    }
+
     try {
-      await login(email, password);
-      const redirectTo = state.from?.pathname ?? '/dashboard';
-      navigate(redirectTo, { replace: true });
-    } catch (err) {
+      await api.post('/auth/register', {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password
+      });
+
+      // Sucesso - redirecionar para login
+      navigate('/login', { 
+        state: { 
+          message: 'Conta criada com sucesso! Agora pode iniciar sessão.' 
+        }
+      });
+    } catch (err: any) {
       console.error(err);
-      setError('Nao foi possivel iniciar sessao. Verifique as credenciais.');
+      if (err.response?.status === 409) {
+        setError('Este email já está registado');
+      } else {
+        setError('Erro ao criar conta. Tente novamente.');
+      }
     } finally {
       setLoading(false);
     }
+  }
+
+  function handleInputChange(field: keyof typeof formData, value: string) {
+    setFormData(prev => ({ ...prev, [field]: value }));
   }
 
   return (
@@ -82,50 +99,68 @@ export function LoginPage() {
             backgroundClip: 'text',
             marginBottom: 'var(--space-2)'
           }}>
-            CRM Eclat Net
+            Criar Conta
           </h1>
           <p className="text-muted">
-            Entre para aceder ao seu painel de gestão
+            Crie a sua conta para aceder ao CRM Eclat Net
           </p>
         </div>
 
         <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 'var(--space-4)' }}>
+          <div>
+            <label htmlFor="name">Nome Completo</label>
+            <input
+              id="name"
+              type="text"
+              required
+              value={formData.name}
+              onChange={(e) => handleInputChange('name', e.target.value)}
+              placeholder="O seu nome"
+              disabled={loading}
+            />
+          </div>
+
           <div>
             <label htmlFor="email">Endereço de Email</label>
             <input
               id="email"
               type="email"
               required
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              value={formData.email}
+              onChange={(e) => handleInputChange('email', e.target.value)}
               placeholder="exemplo@empresa.com"
               disabled={loading}
             />
           </div>
+
           <div>
             <label htmlFor="password">Palavra-passe</label>
             <input
               id="password"
               type="password"
               required
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              value={formData.password}
+              onChange={(e) => handleInputChange('password', e.target.value)}
               placeholder="••••••••"
               disabled={loading}
+              minLength={6}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="confirmPassword">Confirmar Palavra-passe</label>
+            <input
+              id="confirmPassword"
+              type="password"
+              required
+              value={formData.confirmPassword}
+              onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
+              placeholder="••••••••"
+              disabled={loading}
+              minLength={6}
             />
           </div>
           
-          {successMessage ? (
-            <div className="alert" style={{ 
-              background: 'var(--success-bg)',
-              border: '1px solid var(--success-light)',
-              color: 'var(--success-dark)'
-            }}>
-              <Icon name="check" size="sm" />
-              {successMessage}
-            </div>
-          ) : null}
-
           {error ? (
             <div className="alert" style={{ 
               background: 'var(--danger-bg)',
@@ -146,12 +181,12 @@ export function LoginPage() {
             {loading ? (
               <>
                 <LoadingSpinner size="small" message="" inline />
-                A iniciar sessão...
+                A criar conta...
               </>
             ) : (
               <>
-                <Icon name="arrow_right" size="sm" />
-                Entrar
+                <Icon name="user_plus" size="sm" />
+                Criar Conta
               </>
             )}
           </button>
@@ -164,16 +199,16 @@ export function LoginPage() {
           borderTop: '1px solid var(--gray-200)'
         }}>
           <p className="text-muted">
-            Não tem conta?{' '}
+            Já tem conta?{' '}
             <Link 
-              to="/register" 
+              to="/login" 
               style={{ 
                 color: 'var(--primary)',
                 textDecoration: 'none',
                 fontWeight: '500'
               }}
             >
-              Criar conta
+              Iniciar sessão
             </Link>
           </p>
         </div>

@@ -5,6 +5,7 @@ import { useAuth } from './context/AuthContext';
 import { DashboardPage } from './pages/Dashboard';
 import { ClientsPage } from './pages/Clients';
 import { LoginPage } from './pages/Login';
+import { RegisterPage } from './pages/Register';
 import { ServicesPage } from './pages/Services';
 
 function ProtectedRoute() {
@@ -42,6 +43,7 @@ export default function App() {
     <>
       <Routes>
         <Route path="/login" element={token ? <Navigate to="/dashboard" replace /> : <LoginPage />} />
+        <Route path="/register" element={token ? <Navigate to="/dashboard" replace /> : <RegisterPage />} />
         <Route element={<ProtectedRoute />}>
           <Route element={<AppLayout />}>
             <Route index element={<Navigate to="/dashboard" replace />} />
